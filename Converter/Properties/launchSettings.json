@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Converter": {
+      "commandName": "Project",
+      "commandLineArgs": "--name djfi"
+    }
+  }
+}
