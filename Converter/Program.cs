@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.CommandLine;
 using System.CommandLine.Builder;
 using System.CommandLine.Hosting;
@@ -29,10 +30,15 @@ namespace Converter
         {
             var root = new RootCommand()
             {
-                new Option<string>("--name")
+                new Option<string>("--input")
                 {
                     IsRequired = true,
-                    Description = "Name"
+                    Description = "Input path"
+                },
+                new Option<string>("--output")
+                {
+                    IsRequired = true,
+                    Description = "Output path"
                 }
             };
 
@@ -59,6 +65,8 @@ namespace Converter
 
     public class ProgramOptions
     {
-        public string Name { get; set; }
+        public string Input { get; set; }
+
+        public string Output { get; set; }
     }
 }
