@@ -1,12 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.CommandLine;
 using System.CommandLine.Builder;
 using System.CommandLine.Hosting;
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+
+[assembly: InternalsVisibleTo("Converter.Tests")]
 
 namespace Converter
 {
