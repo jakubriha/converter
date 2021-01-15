@@ -7,10 +7,10 @@ using Xunit;
 
 namespace Converter.Tests
 {
-    public class JsonFormatDeserializerTests
+    public class FormatDeserializerTests
     {
         [Fact]
-        public void InputJsonInCorrectFormat_DeserializedObjectReturned()
+        public void Json_InputJsonInCorrectFormatIsDeserialized_DeserializedDocumentReturned()
         {
             IFormatDeserializer service = new JsonFormatDeserializer();
             var json = @"{ ""title"": ""title"", ""text"": ""text"" }";
@@ -21,7 +21,7 @@ namespace Converter.Tests
         }
 
         [Fact]
-        public void InputJsonInIncorrectFormat_ExceptionThrown()
+        public void Json_InputJsonInIncorrectFormatIsDeserialized_ExceptionThrown()
         {
             IFormatDeserializer service = new JsonFormatDeserializer();
             var json = "{}";
