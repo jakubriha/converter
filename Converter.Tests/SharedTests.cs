@@ -1,9 +1,4 @@
-using Converter.Services;
 using FluentAssertions;
-using NSubstitute;
-using System;
-using System.IO;
-using System.IO.Abstractions;
 using Xunit;
 
 namespace Converter.Tests

@@ -7,6 +7,7 @@ using System.CommandLine.Builder;
 using System.CommandLine.Hosting;
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
+using System.IO.Abstractions;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -32,20 +33,22 @@ namespace Converter
                             services.AddTransient<IFormatDeserializer, XmlFormatDeserializer>();
 
                             // Format serializers
-                            services.AddTransient<IFormatSerializer, XmlFormatSerializer>();
+                            services.AddTransient<IFormatSerializer, JsonFormatSerializer>();
                             services.AddTransient<IFormatSerializer, XmlFormatSerializer>();
                             
                             // Program flow
                             services.AddTransient<IProcessingServicesAggregator, ProcessingServicesAggregator>();
                             services.AddTransient<IValidServiceSelector, ValidServiceSelector>();
                             services.AddTransient<IProgramPipeline, ProgramPipeline>();
+
+                            // Others
+                            services.AddTransient<IFileSystem, FileSystem>();
                         });
                     })
                 .UseDefaults()
                 .Build()
                 .InvokeAsync(args);
 
-        // TODO: Implement other parameters.
         private static CommandLineBuilder BuildCommandLine()
         {
             var root = new RootCommand()

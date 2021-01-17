@@ -7,7 +7,8 @@ namespace Converter
     {
         public static readonly JsonSerializerOptions SerializerOptions = new JsonSerializerOptions
         {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = true
         };
 
         public static bool IsFileSystemPath(string path)

@@ -12,19 +12,19 @@ namespace Converter.Services
     internal class ProgramPipeline : IProgramPipeline
     {
         private readonly ILogger<ProgramPipeline> logger;
-        private readonly ProcessingServicesAggregator validProcessingServicesSelector;
+        private readonly IProcessingServicesAggregator processingServicesAggregator;
 
-        public ProgramPipeline(ILogger<ProgramPipeline> logger, ProcessingServicesAggregator validProcessingServicesSelector)
+        public ProgramPipeline(ILogger<ProgramPipeline> logger, IProcessingServicesAggregator processingServicesAggregator)
         {
             this.logger = logger;
-            this.validProcessingServicesSelector = validProcessingServicesSelector;
+            this.processingServicesAggregator = processingServicesAggregator;
         }
 
         public void ExecutePipeline(ProgramOptions programOptions)
         {
             try
             {
-                var (dataReader, formatDeserializer, formatSerializer, dataWriter) = validProcessingServicesSelector.SelectValidProcessingServices(programOptions);
+                var (dataReader, formatDeserializer, formatSerializer, dataWriter) = processingServicesAggregator.SelectValidProcessingServices(programOptions);
 
                 var dataToBeDeserialized = dataReader.ReadAllBytes(programOptions.Input);
 
