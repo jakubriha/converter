@@ -48,7 +48,7 @@ namespace Converter.Tests
 
         [Fact]
         public void NoReaderIsProvided_ExceptionThrown() =>
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ProgramPipeline(Array.Empty<IDataReader>()));
+            Assert.ThrowsAny<Exception>(() => new ProgramPipeline(Array.Empty<IDataReader>()));
 
         private static IList<IDataReader> GenerateDataReaderMocks(params bool[] dataReadersValidity) =>
             dataReadersValidity.Select(validity =>

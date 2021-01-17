@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Converter.Services
@@ -15,10 +16,7 @@ namespace Converter.Services
 
         public ProgramPipeline(IEnumerable<IDataReader> dataReaders)
         {
-            if (!dataReaders.Any())
-            {
-                throw new ArgumentOutOfRangeException(nameof(dataReaders), "No data readers provided.");
-            }
+            Debug.Assert(dataReaders.Any());
 
             this.dataReaders = dataReaders;
         }
