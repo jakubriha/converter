@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Converter.Models
 {
-    public readonly struct Document
+    internal readonly struct Document
     {
         [JsonConstructor]
         public Document(string title, string text)

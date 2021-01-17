@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
 ﻿using Converter.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.CommandLine;
 using System.CommandLine.Builder;
@@ -29,6 +29,7 @@ namespace Converter
                 .Build()
                 .InvokeAsync(args);
 
+        // TODO: Implement other parameters.
         private static CommandLineBuilder BuildCommandLine()
         {
             var root = new RootCommand()
@@ -58,7 +59,7 @@ namespace Converter
         }
     }
 
-    public class RootService
+    internal class RootService
     {
         public void Run(ProgramOptions programOptions)
         {
