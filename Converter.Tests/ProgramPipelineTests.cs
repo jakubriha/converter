@@ -11,7 +11,7 @@ namespace Converter.Tests
     public class ProgramPipelineTests
     {
         [Fact]
-        public void SingleValidReaderIsProvided_TheReaderReturned()
+        public void SingleValidReaderIsProvided_TheReaderIsReturned()
         {
             var dataReaders = GenerateDataReaderMocks(true);
 
@@ -23,7 +23,7 @@ namespace Converter.Tests
         }
 
         [Fact]
-        public void SingleInvalidReaderIsProvided_NullReturned()
+        public void SingleInvalidReaderIsProvided_NullIsReturned()
         {
             var dataReaders = GenerateDataReaderMocks(false);
 
@@ -35,7 +35,7 @@ namespace Converter.Tests
         }
 
         [Fact]
-        public void TwoReadersWithTheSecondValidAreProvided_TheSecondReturned()
+        public void TwoReadersWithTheSecondValidAreProvided_TheSecondIsReturned()
         {
             var dataReaders = GenerateDataReaderMocks(false, true);
 
@@ -47,7 +47,7 @@ namespace Converter.Tests
         }
 
         [Fact]
-        public void NoReaderIsProvided_ExceptionThrown() =>
+        public void NoReaderIsProvided_ExceptionIsThrown() =>
             Assert.ThrowsAny<Exception>(() => new ProgramPipeline(Array.Empty<IDataReader>()));
 
         private static IList<IDataReader> GenerateDataReaderMocks(params bool[] dataReadersValidity) =>

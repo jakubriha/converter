@@ -10,7 +10,7 @@ namespace Converter.Tests
     public class FormatSerializerTests
     {
         [Fact]
-        public void Xml_DocumentIsSerialized_SerializedDocumentReturned()
+        public void Xml_DocumentIsSerialized_SerializedDocumentIsReturned()
         {
             IFormatSerializer service = new XmlFormatSerializer();
 

@@ -10,7 +10,7 @@ namespace Converter.Tests
     public class FormatDeserializerTests
     {
         [Fact]
-        public void Json_InputJsonInCorrectFormatIsDeserialized_DeserializedDocumentReturned()
+        public void Json_InputJsonInCorrectFormatIsDeserialized_DeserializedDocumentIsReturned()
         {
             IFormatDeserializer service = new JsonFormatDeserializer();
             var json = @"{ ""title"": ""title"", ""text"": ""text"" }";
@@ -21,7 +21,7 @@ namespace Converter.Tests
         }
 
         [Fact]
-        public void Json_InputJsonInIncorrectFormatIsDeserialized_ExceptionThrown()
+        public void Json_InputJsonInIncorrectFormatIsDeserialized_ExceptionIsThrown()
         {
             IFormatDeserializer service = new JsonFormatDeserializer();
             var json = "{}";

@@ -11,7 +11,7 @@ namespace Converter.Tests
     public class DataReaderTests
     {
         [Fact]
-        public void FileSystem_ExistingFileIsRead_FileContentReturned()
+        public void FileSystem_ExistingFileIsRead_FileContentIsReturned()
         {
             var fileSystem = Substitute.For<IFileSystem>();
             fileSystem.File.ReadAllBytes(@"C:\test.txt").Returns(new byte[] { 1, 2, 3 });
@@ -24,7 +24,7 @@ namespace Converter.Tests
         }
 
         [Fact]
-        public void FileSystem_NonexistingFileIsRead_ExceptionThrown()
+        public void FileSystem_NonexistingFileIsRead_ExceptionIsThrown()
         {
             var fileSystem = Substitute.For<IFileSystem>();
             fileSystem.File.ReadAllBytes(Arg.Any<string>()).Returns(x => throw new FileNotFoundException());
