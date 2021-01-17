@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace Converter.Models
 {
+    /// <summary>
+    /// Represents document, which can be serialized or deserialized.
+    /// </summary>
     public readonly struct Document
     {
         [JsonConstructor]

@@ -2,8 +2,16 @@
 
 namespace Converter.Services
 {
+    /// <summary>
+    /// Provides method to write data to data source.
+    /// </summary>
     internal interface IDataWriter : IProcessingService<string>
     {
+        /// <summary>
+        /// Writes whole byte array to a data source.
+        /// </summary>
+        /// <param name="path">The data source to write to.</param>
+        /// <param name="data">A byte array to be written to data source.</param>
         void WriteAllBytes(string path, byte[] data);
     }
 

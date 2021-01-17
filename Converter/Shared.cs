@@ -3,6 +3,9 @@ using System.Text.Json;
 
 namespace Converter
 {
+    /// <summary>
+    /// Shared class used across the application.
+    /// </summary>
     internal class Shared
     {
         public static readonly JsonSerializerOptions SerializerOptions = new JsonSerializerOptions

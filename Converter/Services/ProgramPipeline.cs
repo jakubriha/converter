@@ -4,8 +4,16 @@ using System;
 
 namespace Converter.Services
 {
+    /// <summary>
+    /// Represents main program pipeline.
+    /// </summary>
     internal interface IProgramPipeline
     {
+        /// <summary>
+        /// Executes main program pipeline.
+        /// </summary>
+        /// <param name="programOptions">Program command-line options.</param>
+        /// <returns>Program exit code.</returns>
         int ExecutePipeline(ProgramOptions programOptions);
     }
 

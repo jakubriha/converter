@@ -5,8 +5,16 @@ using System.Xml.Serialization;
 
 namespace Converter.Services
 {
+    /// <summary>
+    /// Provides method to deserialize byte array to Document.
+    /// </summary>
     internal interface IFormatDeserializer : IProcessingService<FormatType>
     {
+        /// <summary>
+        /// Deserializes byte array to Document
+        /// </summary>
+        /// <param name="input">Byte array to deserialize.</param>
+        /// <returns>Deserialized Document.</returns>
         Document Deserialize(byte[] input);
     }
 

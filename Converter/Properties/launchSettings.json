@@ -2,7 +2,7 @@
   "profiles": {
     "Converter": {
       "commandName": "Project",
-      "commandLineArgs": "--input test.txt --output test-out.txt --input-format Xml --output-format Json"
+      "commandLineArgs": "-h"
     }
   }
 }

@@ -5,8 +5,16 @@ using System.Xml.Serialization;
 
 namespace Converter.Services
 {
+    /// <summary>
+    /// Provides method to serialize Document to byte array.
+    /// </summary>
     internal interface IFormatSerializer : IProcessingService<FormatType>
     {
+        /// <summary>
+        /// Serializes byte array to Document.
+        /// </summary>
+        /// <param name="document">Document to serialize.</param>
+        /// <returns>Serialized document.</returns>
         byte[] Serialize(Document document);
     }
 

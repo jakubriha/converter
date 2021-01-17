@@ -3,8 +3,16 @@ using System.Collections.Generic;
 
 namespace Converter.Services
 {
+    /// <summary>
+    /// Aggregates pipeline processing services.
+    /// </summary>
     internal interface IProcessingServicesAggregator
     {
+        /// <summary>
+        /// Aggregates pipeline processing services into tuple given program options.
+        /// </summary>
+        /// <param name="programOptions">Program options used to determine which services should be aggregated based on validity.</param>
+        /// <returns></returns>
         (IDataReader dataReader, IFormatDeserializer formatDeserializer, IFormatSerializer formatSerializer, IDataWriter dataWriter) SelectValidProcessingServices(ProgramOptions programOptions);
     }
 
