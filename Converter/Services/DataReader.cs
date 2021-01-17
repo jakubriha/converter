@@ -5,11 +5,9 @@ namespace Converter.Services
 {
     // TODO: Do not use Uri as location type. Uri doesn't support relative paths for file system files.
 
-    public interface IDataReader
+    public interface IDataReader : IProcessingService<string>
     {
-        bool IsValidLocation(Uri location);
-
-        byte[] ReadAllBytes(Uri location);
+        byte[] ReadAllBytes(string path);
     }
 
     internal class FileSystemDataReader : IDataReader
@@ -19,13 +17,13 @@ namespace Converter.Services
         public FileSystemDataReader(IFileSystem fileSystem) =>
             this.fileSystem = fileSystem;
 
-        public bool IsValidLocation(Uri location)
+        public bool IsValidService(string input)
         {
             // TODO: Implement valid location check.
             throw new NotImplementedException();
         }
 
-        public byte[] ReadAllBytes(Uri location) =>
-            fileSystem.File.ReadAllBytes(location.LocalPath);
+        public byte[] ReadAllBytes(string path) =>
+            fileSystem.File.ReadAllBytes(path);
     }
 }

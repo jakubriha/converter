@@ -3,9 +3,9 @@ using System.IO.Abstractions;
 
 namespace Converter.Services
 {
-    internal interface IDataWriter
+    internal interface IDataWriter : IProcessingService<string>
     {
-        void WriteAllBytes(Uri location, byte[] data);
+        void WriteAllBytes(string path, byte[] data);
     }
 
     internal class FileSystemDataWriter : IDataWriter
@@ -15,7 +15,12 @@ namespace Converter.Services
         public FileSystemDataWriter(IFileSystem fileSystem) =>
             this.fileSystem = fileSystem;
 
-        public void WriteAllBytes(Uri location, byte[] data) =>
-            fileSystem.File.WriteAllBytes(location.LocalPath, data);
+        public bool IsValidService(string input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WriteAllBytes(string path, byte[] data) =>
+            fileSystem.File.WriteAllBytes(path, data);
     }
 }

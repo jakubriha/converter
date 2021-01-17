@@ -43,6 +43,16 @@ namespace Converter
                 {
                     IsRequired = true,
                     Description = "Output path"
+                },
+                new Option<FormatType>("--input-format")
+                {
+                    IsRequired = true,
+                    Description = "Input format"
+                },
+                new Option<FormatType>("--output-format")
+                {
+                    IsRequired = true,
+                    Description = "Output format"
                 }
             };
 

@@ -18,7 +18,7 @@ namespace Converter.Tests
 
             IDataReader reader = new FileSystemDataReader(fileSystem);
 
-            byte[] actual = reader.ReadAllBytes(new Uri(@"C:\test.txt"));
+            byte[] actual = reader.ReadAllBytes(@"C:\test.txt");
 
             actual.Should().BeEquivalentTo(new byte[] { 1, 2, 3 });
         }
@@ -31,7 +31,7 @@ namespace Converter.Tests
 
             IDataReader reader = new FileSystemDataReader(fileSystem);
 
-            Action act = () => reader.ReadAllBytes(new Uri(@"C:\test.txt"));
+            Action act = () => reader.ReadAllBytes(@"C:\test.txt");
 
             act.Should().Throw<FileNotFoundException>();
         }

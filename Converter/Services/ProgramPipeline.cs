@@ -1,27 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using Converter.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Converter.Services
 {
     internal interface IProgramPipeline
     {
-        IDataReader SelectCorrectDataReader(Uri location);
+        void ExecutePipeline(ProgramOptions programOptions);
     }
 
     internal class ProgramPipeline : IProgramPipeline
     {
-        private readonly IEnumerable<IDataReader> dataReaders;
+        private readonly ILogger<ProgramPipeline> logger;
+        private readonly ProcessingServicesAggregator validProcessingServicesSelector;
 
-        public ProgramPipeline(IEnumerable<IDataReader> dataReaders)
+        public ProgramPipeline(ILogger<ProgramPipeline> logger, ProcessingServicesAggregator validProcessingServicesSelector)
         {
-            Debug.Assert(dataReaders.Any());
-
-            this.dataReaders = dataReaders;
+            this.logger = logger;
+            this.validProcessingServicesSelector = validProcessingServicesSelector;
         }
 
-        public IDataReader SelectCorrectDataReader(Uri location) =>
-            dataReaders.FirstOrDefault(dataReader => dataReader.IsValidLocation(location));
+        public void ExecutePipeline(ProgramOptions programOptions)
+        {
+            var (dataReader, formatDeserializer, formatSerializer, dataWriter) = validProcessingServicesSelector.SelectValidProcessingServices(programOptions);
+
+            var dataToBeDeserialized = dataReader.ReadAllBytes(programOptions.Input);
+
+            var document = formatDeserializer.Deserialize(dataToBeDeserialized);
+
+            var dataToBeSaved = formatSerializer.Serialize(document);
+
+            dataWriter.WriteAllBytes(programOptions.Output, dataToBeSaved);
+
+            logger.LogInformation("Conversion was successful.");
+        }
     }
 }
