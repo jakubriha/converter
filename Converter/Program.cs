@@ -51,27 +51,27 @@ namespace Converter
 
         private static CommandLineBuilder BuildCommandLine()
         {
-            var root = new RootCommand()
+            var root = new RootCommand("Converter is a utility program to convert data between multiple formats.")
             {
                 new Option<string>("--input")
                 {
                     IsRequired = true,
-                    Description = "Input path"
-                },
-                new Option<string>("--output")
-                {
-                    IsRequired = true,
-                    Description = "Output path"
+                    Description = "Relative or absolute path from where to load the data"
                 },
                 new Option<FormatType>("--input-format")
                 {
                     IsRequired = true,
-                    Description = "Input format"
+                    Description = "Input data format"
+                },
+                new Option<string>("--output")
+                {
+                    IsRequired = true,
+                    Description = "Relative or absolute path to where to save the data"
                 },
                 new Option<FormatType>("--output-format")
                 {
                     IsRequired = true,
-                    Description = "Output format"
+                    Description = "Output data format"
                 }
             };
 
