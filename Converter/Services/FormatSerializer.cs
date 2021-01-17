@@ -1,5 +1,6 @@
 ﻿using Converter.Models;
 using System.IO;
+using System.Text.Json;
 using System.Xml.Serialization;
 
 namespace Converter.Services
@@ -7,6 +8,15 @@ namespace Converter.Services
     internal interface IFormatSerializer : IProcessingService<FormatType>
     {
         byte[] Serialize(Document document);
+    }
+
+    internal class JsonFormatSerializer : IFormatSerializer
+    {
+        public bool IsValidService(FormatType parameter) =>
+            parameter == FormatType.Json;
+
+        public byte[] Serialize(Document document) =>
+           JsonSerializer.SerializeToUtf8Bytes(document, Shared.SerializerOptions);
     }
 
     internal class XmlFormatSerializer : IFormatSerializer
