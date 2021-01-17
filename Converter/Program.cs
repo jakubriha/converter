@@ -1,4 +1,5 @@
 ﻿using Converter.Models;
+using Converter.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.CommandLine;
@@ -22,7 +23,22 @@ namespace Converter
                     {
                         host.ConfigureServices((hostContext, services) =>
                         {
-                            services.AddTransient<RootService>();
+                            // Data reading/writing
+                            services.AddTransient<IDataReader, FileSystemDataReader>();
+                            services.AddTransient<IDataWriter, FileSystemDataWriter>();
+
+                            // Format deserializers
+                            services.AddTransient<IFormatDeserializer, JsonFormatDeserializer>();
+                            services.AddTransient<IFormatDeserializer, XmlFormatDeserializer>();
+
+                            // Format serializers
+                            services.AddTransient<IFormatSerializer, XmlFormatSerializer>();
+                            services.AddTransient<IFormatSerializer, XmlFormatSerializer>();
+                            
+                            // Program flow
+                            services.AddTransient<IProcessingServicesAggregator, ProcessingServicesAggregator>();
+                            services.AddTransient<IValidServiceSelector, ValidServiceSelector>();
+                            services.AddTransient<IProgramPipeline, ProgramPipeline>();
                         });
                     })
                 .UseDefaults()
@@ -63,17 +79,9 @@ namespace Converter
 
         private static void Run(ProgramOptions programOptions, IHost host)
         {
-            var srv = host.Services.GetService<RootService>();
+            var programPipeline = host.Services.GetService<IProgramPipeline>();
 
-            srv.Run(programOptions);
-        }
-    }
-
-    internal class RootService
-    {
-        public void Run(ProgramOptions programOptions)
-        {
-            //throw new NotImplementedException();
+            programPipeline.ExecutePipeline(programOptions);
         }
     }
 }
