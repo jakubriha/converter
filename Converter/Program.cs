@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Converter.Models;
 using Microsoft.Extensions.Hosting;
 using System.CommandLine;
 using System.CommandLine.Builder;
@@ -63,12 +64,5 @@ namespace Converter
         {
             //throw new NotImplementedException();
         }
-    }
-
-    public class ProgramOptions
-    {
-        public string Input { get; set; }
-
-        public string Output { get; set; }
     }
 }
