@@ -6,7 +6,7 @@ namespace Converter.Services
 {
     internal interface IProgramPipeline
     {
-        void ExecutePipeline(ProgramOptions programOptions);
+        int ExecutePipeline(ProgramOptions programOptions);
     }
 
     internal class ProgramPipeline : IProgramPipeline
@@ -20,7 +20,7 @@ namespace Converter.Services
             this.processingServicesAggregator = processingServicesAggregator;
         }
 
-        public void ExecutePipeline(ProgramOptions programOptions)
+        public int ExecutePipeline(ProgramOptions programOptions)
         {
             try
             {
@@ -39,7 +39,11 @@ namespace Converter.Services
             catch (Exception e)
             {
                 logger.LogError(e, "There was an error in the application");
+
+                return -1;
             }
+
+            return 0;
         }
     }
 }

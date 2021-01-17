@@ -80,11 +80,13 @@ namespace Converter
             return new CommandLineBuilder(root);
         }
 
-        private static void Run(ProgramOptions programOptions, IHost host)
+        private static Task<int> Run(ProgramOptions programOptions, IHost host)
         {
             var programPipeline = host.Services.GetService<IProgramPipeline>();
 
-            programPipeline.ExecutePipeline(programOptions);
+            var exitCode = programPipeline.ExecutePipeline(programOptions);
+
+            return Task.FromResult(exitCode);
         }
     }
 }
