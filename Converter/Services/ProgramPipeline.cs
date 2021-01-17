@@ -1,5 +1,6 @@
 ﻿using Converter.Models;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace Converter.Services
 {
@@ -21,17 +22,24 @@ namespace Converter.Services
 
         public void ExecutePipeline(ProgramOptions programOptions)
         {
-            var (dataReader, formatDeserializer, formatSerializer, dataWriter) = validProcessingServicesSelector.SelectValidProcessingServices(programOptions);
+            try
+            {
+                var (dataReader, formatDeserializer, formatSerializer, dataWriter) = validProcessingServicesSelector.SelectValidProcessingServices(programOptions);
 
-            var dataToBeDeserialized = dataReader.ReadAllBytes(programOptions.Input);
+                var dataToBeDeserialized = dataReader.ReadAllBytes(programOptions.Input);
 
-            var document = formatDeserializer.Deserialize(dataToBeDeserialized);
+                var document = formatDeserializer.Deserialize(dataToBeDeserialized);
 
-            var dataToBeSaved = formatSerializer.Serialize(document);
+                var dataToBeSaved = formatSerializer.Serialize(document);
 
-            dataWriter.WriteAllBytes(programOptions.Output, dataToBeSaved);
+                dataWriter.WriteAllBytes(programOptions.Output, dataToBeSaved);
 
-            logger.LogInformation("Conversion was successful.");
+                logger.LogInformation("Conversion was successful.");
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, "There was an error in the application");
+            }
         }
     }
 }
