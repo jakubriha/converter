@@ -11,10 +11,8 @@ namespace Converter.Services
 
     internal class XmlFormatSerializer : IFormatSerializer
     {
-        public bool IsValidService(FormatType input)
-        {
-            throw new System.NotImplementedException();
-        }
+        public bool IsValidService(FormatType parameter) =>
+            parameter == FormatType.Xml;
 
         public byte[] Serialize(Document document)
         {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO.Abstractions;
+﻿using System.IO.Abstractions;
 
 namespace Converter.Services
 {
@@ -15,10 +14,8 @@ namespace Converter.Services
         public FileSystemDataWriter(IFileSystem fileSystem) =>
             this.fileSystem = fileSystem;
 
-        public bool IsValidService(string input)
-        {
-            throw new NotImplementedException();
-        }
+        public bool IsValidService(string parameter) =>
+            Shared.IsFileSystemPath(parameter);
 
         public void WriteAllBytes(string path, byte[] data) =>
             fileSystem.File.WriteAllBytes(path, data);

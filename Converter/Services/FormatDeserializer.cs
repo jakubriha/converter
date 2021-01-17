@@ -1,4 +1,5 @@
 ﻿using Converter.Models;
+using System;
 using System.Text.Json;
 
 namespace Converter.Services
@@ -15,10 +16,8 @@ namespace Converter.Services
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
 
-        public bool IsValidService(FormatType input)
-        {
-            throw new System.NotImplementedException();
-        }
+        public bool IsValidService(FormatType parameter) =>
+            parameter == FormatType.Json;
 
         public Document Deserialize(byte[] input) =>
             JsonSerializer.Deserialize<Document>(input, serializerOptions);
